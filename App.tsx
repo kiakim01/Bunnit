@@ -6,16 +6,17 @@
  */
 
 import './global.css';
-import { SafeAreaView, StatusBar, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Main from './src/view/Main.tsx';
 
 function App() {
   return (
-    <SafeAreaView className={'bg-pink-200'}>
-      <StatusBar />
-      <View>
-        <Text>안녕하세요</Text>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView className={'flex-1'}>
+        <Main />
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
