@@ -8,7 +8,7 @@
 import './global.css';
 import { SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import Main from './src/view/Main.tsx';
+import Main from './src/screens/Main.tsx';
 
 function App() {
   return (

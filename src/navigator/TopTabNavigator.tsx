@@ -1,7 +1,7 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import FirstTabView from '../view/FirstTabView.tsx';
-import SecondTabView from '../view/SecondTabView.tsx';
+import FirstTabView from '../screens/top-tabs/FirstTabView.tsx';
+import SecondTabView from '../screens/top-tabs/SecondTabView.tsx';
 
 const Tab = createMaterialTopTabNavigator();
 
