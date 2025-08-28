@@ -31,7 +31,7 @@ const MonthlyDateItem: React.FC<DateItemProps> = ({
       {day && (
         <View
           className={`w-10 h-10 items-center justify-center rounded-full ${
-            isSelected ? 'border-blue-500 border-2' : ''
+            isSelected && 'border-blue-500 border-2'
           }`}
         >
           <Text

@@ -20,11 +20,7 @@ const WeeklyDateItem: React.FC<WeeklyDateItemProps> = ({
 }) => {
   return (
     <TouchableOpacity onPress={() => onPress(day)} className="mx-2">
-      <View
-        className={`w-16 h-20 items-center justify-center rounded-2xl ${
-          isSelected ? 'border-blue-500 border-2' : ''
-        }`}
-      >
+      <View className={`w-16 h-20 items-center justify-center rounded-2xl `}>
         <Text
           className={`text-xs mb-1 ${
             dayOfWeek === 0
@@ -36,11 +32,16 @@ const WeeklyDateItem: React.FC<WeeklyDateItemProps> = ({
         >
           {dayName}
         </Text>
-        <Text
-          className={`text-lg ${isToday ? 'text-blue-500' : 'text-gray-800'}`}
+        <View
+          className={`${
+            isSelected &&
+            'w-10 h-10 items-center justify-center rounded-full border-2 border-blue-500 '
+          }`}
         >
-          {day}
-        </Text>
+          <Text className={`text-lg  text-gray-800 ${isToday && 'font-bold'}`}>
+            {day}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
