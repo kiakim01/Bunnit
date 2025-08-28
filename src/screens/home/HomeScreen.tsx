@@ -8,7 +8,9 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView className={'h-full bg-white'}>
-      <View className={'flex-1 px-5 pt-6 h-full'}>
+      <View
+        className={'flex justify-center items-center flex-1 px-5 pt-6 h-full'}
+      >
         <Text>HomeView</Text>
       </View>
     </SafeAreaView>
