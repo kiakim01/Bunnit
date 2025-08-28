@@ -42,7 +42,7 @@ const CalenderScreen = () => {
     'December',
   ];
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const MAX_TRANSLATE_Y = 300; // MonthlyView
+  const MAX_TRANSLATE_Y = 150; // MonthlyView
   const MIN_TRANSLATE_Y = 70; // Weekly View
   const translateY = useSharedValue(MIN_TRANSLATE_Y); // WeeklyView로 시작
   const updateViewMode = useCallback((value: boolean) => {
@@ -254,7 +254,6 @@ const CalenderScreen = () => {
             <Animated.View
               style={[
                 {
-                  // flex: 1,
                   height: '50%',
                 },
                 animatedStyle,
