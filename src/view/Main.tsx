@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import MainNavigator from '../navigator/MainNavigator.tsx';
+import BottomTabNavigator from '../navigator/BottomTabNavigator.tsx';
 
 const Main = () => {
   return (
     <View className={'flex-1 h-full'}>
       <View className={'flex-1'}>
-        <MainNavigator />
+        <BottomTabNavigator />
       </View>
     </View>
   );

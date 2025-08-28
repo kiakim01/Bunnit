@@ -1,14 +1,11 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import FirstTabView from '../view/FirstTabView.tsx';
 import SecondTabView from '../view/SecondTabView.tsx';
 
 const Tab = createMaterialTopTabNavigator();
 
-const MainNavigator = () => {
-  const { width: windowWidth } = Dimensions.get('window');
-
+const TopTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -31,4 +28,4 @@ const MainNavigator = () => {
   );
 };
 
-export default MainNavigator;
+export default TopTabNavigator;
