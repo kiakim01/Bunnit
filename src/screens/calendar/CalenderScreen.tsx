@@ -5,11 +5,15 @@ import {
   View,
   TouchableOpacity,
   FlatList,
+  ScrollView,
 } from 'react-native';
+import MonthlyDateItem from '../../component/MonthlyDateItem.tsx';
+import WeeklyDateItem from '../../component/WeeklyDateItem.tsx';
 
 const CalenderScreen = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectDate, setSelectDate] = useState<number>();
+  const [isMonthlyView, setIsMonthlyView] = useState<boolean>(false);
 
   const monthNames = [
     'January',
@@ -83,7 +87,7 @@ const CalenderScreen = () => {
     <SafeAreaView className={'h-full bg-white'}>
       <View className={'flex-1 px-5 pt-6'}>
         {/* 헤더: 월/연도 표시 및 네비게이션 */}
-        <View className={'flex-row justify-between items-center mb-6'}>
+        <View className={'flex-row justify-between items-center mb-4'}>
           <TouchableOpacity onPress={goToPreviousMonth} className={'p-2'}>
             <Text className={'text-2xl text-gray-600'}>‹</Text>
           </TouchableOpacity>
@@ -100,67 +104,76 @@ const CalenderScreen = () => {
         </View>
 
         {/* 요일 헤더 */}
-        <View className={'flex-row mb-2'}>
-          {daysOfWeek.map((day, index) => (
-            <View key={index} className={'flex-1 items-center py-2'}>
-              <Text
-                className={`text-sm font-medium ${
-                  index === 0
-                    ? 'text-red-500'
-                    : index === 6
-                    ? 'text-blue-500'
-                    : 'text-gray-600'
-                }`}
-              >
-                {day}
-              </Text>
-            </View>
-          ))}
-        </View>
+        {isMonthlyView && (
+          <View className={'flex-row mb-2'}>
+            {daysOfWeek.map((day, index) => (
+              <View key={index} className={'flex-1 items-center py-2'}>
+                <Text
+                  className={`text-sm font-medium ${
+                    index === 0
+                      ? 'text-red-500'
+                      : index === 6
+                      ? 'text-blue-500'
+                      : 'text-gray-600'
+                  }`}
+                >
+                  {day}
+                </Text>
+              </View>
+            ))}
+          </View>
+        )}
 
-        {/* 달력 그리드 */}
-        <FlatList
-          data={days}
-          numColumns={7}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item: day, index }) => {
-            const dayIndex = index % 7;
-            return (
-              <TouchableOpacity
-                className={'flex-1 aspect-square  items-center justify-center'}
-                disabled={!day}
-                onPress={() => {
-                  if (day) {
-                    setSelectDate(day);
-                  }
-                }}
-              >
-                {day && (
-                  <View
-                    className={`w-10 h-10 items-center justify-center rounded-full ${
-                      selectDate === day ? 'border-blue-500 border-2 ' : ''
-                    }`}
-                  >
-                    <Text
-                      className={`text-base text-gray-800 ${
-                        isToday(day)
-                          ? 'font-bold'
-                          : dayIndex === 0
-                          ? 'text-red-500'
-                          : dayIndex === 6
-                          ? 'text-blue-500'
-                          : ''
-                      }`}
-                    >
-                      {day}
-                    </Text>
-                  </View>
-                )}
-              </TouchableOpacity>
-            );
-          }}
-          scrollEnabled={false}
-        />
+        {isMonthlyView ? (
+          <FlatList
+            data={days}
+            numColumns={7}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item: day, index }) => {
+              const dayIndex = index % 7;
+              return (
+                <MonthlyDateItem
+                  day={day}
+                  dayIndex={dayIndex}
+                  isSelected={selectDate === day}
+                  isToday={isToday(day)}
+                  onPress={selectedDay => setSelectDate(selectedDay)}
+                />
+              );
+            }}
+            scrollEnabled={false}
+          />
+        ) : (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            className="py-4"
+          >
+            {days
+              .filter(day => day !== null)
+              .map((day, index) => {
+                const date = new Date(
+                  currentDate.getFullYear(),
+                  currentDate.getMonth(),
+                  day as number,
+                );
+                const dayOfWeek = date.getDay();
+                const dayName = daysOfWeek[dayOfWeek];
+
+                return (
+                  <WeeklyDateItem
+                    key={index}
+                    day={day as number}
+                    dayName={dayName}
+                    dayOfWeek={dayOfWeek}
+                    isSelected={selectDate === day}
+                    isToday={isToday(day as number)}
+                    onPress={selectedDay => setSelectDate(selectedDay)}
+                  />
+                );
+              })}
+          </ScrollView>
+        )}
       </View>
     </SafeAreaView>
   );
