@@ -12,7 +12,6 @@ import Animated, {
   useSharedValue,
   withSpring,
   runOnJS,
-  interpolate,
 } from 'react-native-reanimated';
 import {
   Gesture,
@@ -90,18 +89,6 @@ const CalenderScreen = () => {
     };
   });
 
-  const calendarAnimatedStyle = useAnimatedStyle(() => {
-    const opacity = interpolate(
-      translateY.value,
-      [MIN_TRANSLATE_Y, MAX_TRANSLATE_Y],
-      [0.5, 0.3],
-    );
-
-    return {
-      opacity,
-    };
-  });
-
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -174,8 +161,8 @@ const CalenderScreen = () => {
             </TouchableOpacity>
           </View>
 
-          {/* 캘린더 뷰 (애니메이션 적용) */}
-          <Animated.View style={calendarAnimatedStyle}>
+          {/* 캘린더 뷰 */}
+          <Animated.View>
             {/* 요일 헤더 */}
             {isMonthlyView && (
               <View className={'flex-row mb-2'}>
@@ -249,7 +236,6 @@ const CalenderScreen = () => {
             )}
           </Animated.View>
 
-          {/* TopTabNavigator with PanGesture */}
           <GestureDetector gesture={gesture}>
             <Animated.View
               style={[

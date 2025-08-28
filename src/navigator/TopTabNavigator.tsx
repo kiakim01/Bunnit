@@ -3,6 +3,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import FirstTabView from '../screens/top-tabs/FirstTabView.tsx';
 import SecondTabView from '../screens/top-tabs/SecondTabView.tsx';
 import { View } from 'react-native';
+import ThirdTabView from '../screens/top-tabs/ThirdTabView.tsx';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -31,7 +32,7 @@ const TopTabNavigator = () => {
       >
         <Tab.Screen name={'식단'} component={FirstTabView} />
         <Tab.Screen name={'운동'} component={SecondTabView} />
-        <Tab.Screen name={'신체'} component={SecondTabView} />
+        <Tab.Screen name={'신체'} component={ThirdTabView} />
       </Tab.Navigator>
     </View>
   );
