@@ -42,8 +42,8 @@ const CalenderScreen = () => {
   ];
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const MAX_TRANSLATE_Y = 150; // MonthlyView
-  const MIN_TRANSLATE_Y = 70; // Weekly View
-  const translateY = useSharedValue(MIN_TRANSLATE_Y); // WeeklyView로 시작
+  const MIN_TRANSLATE_Y = 70; // WeeklyView
+  const translateY = useSharedValue(MIN_TRANSLATE_Y);
   const updateViewMode = useCallback((value: boolean) => {
     setIsMonthlyView(value);
   }, []);
